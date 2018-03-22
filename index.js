@@ -1,13 +1,19 @@
-var http = require('http');
+var express =require('express');
 
-var server = http.createServer(function(request, response) {
+var app = express();
 
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hell Nitesh");
+var port=process.env.PORT || 3000;
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('/',function(req,res){
+
+console.log('hello from server');
+
+ res.render('./public/index.html');
 
 });
 
-var port = process.env.PORT || 1337;
-server.listen(port);
+app.listen(port);
 
-console.log("Server running at http://localhost:%d", port);
+console.log('Server Listening at port '+port);
